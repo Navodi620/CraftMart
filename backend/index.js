@@ -1,44 +1,45 @@
 import express, { request, response } from "express";
 import { PORT, mongoDBURL } from "./config.js";
-import mongoose from 'mongoose';
-import { Feedback } from './models/feedbackModel.js';
-import feedbackRoute from './routes/feedbackRoute.js';
+import mongoose from "mongoose";
+import { Payment } from './models/paymentModel.js';
+import paymentsRoutes from './routes/paymentsRoute.js';
 import cors from 'cors';
 
 const app = express();
 
-// Middleware for parsing request body
+//Middleware for parsing request body
 app.use(express.json());
 
-//Middleware for handling Cors Policy
-//Option 01: Allow all Origins with Default of cors (*)
+//Middleware for handling CORS POLICY
+//Option 01: Allow all origins with Default of cors(*)
 app.use(cors());
-//option 02:Allow custom origins
+
+//Option 02: Allow custom origins
 /*
 app.use(
-   cors({
-      origin: 'http://localhost:5555',
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],
-      allowedHeaders: ['Content-Type'],
-   })
+  cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+  })
 );
 */
 
 app.get('/', (request, response) => {
     console.log(request)
-    return response.status(234).send('Welcome to mern stack tutorial')
+    return response.status(234).send('Welcome my project');
 });
 
-app.use('/feedbacks', feedbackRoute);
+app.use('/payments', paymentsRoutes);
 
 mongoose
-   .connect(mongoDBURL)
-   .then(() => {
-     console.log('App connected to database');
-     app.listen(PORT, () => {
-        console.log(`App is listning to port: ${PORT}`)
+  .connect(mongoDBURL)
+  .then(() => {
+      console.log('App connected to database');
+      app.listen(PORT, () => {
+        console.log(`App is listen to port: ${PORT}`);
     });
-   })
-   .catch((error) => {
+  })
+  .catch((error) => {
       console.log(error);
-   })
+  });
