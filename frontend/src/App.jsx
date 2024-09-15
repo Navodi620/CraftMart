@@ -29,8 +29,6 @@ const App = () => {
       <Route path='/feedbacks/full' element={<FullFeedback />} />
       <Route path='/feedbacks/reply/:id' element={<ReplyFeedback />} />
       <Route path='/feedbacks/details/:id' element={<ShowFeedback />} />
-
-      <Route path='/feedbacks/details/:id' element={<ShowFeedback />} />
     </Routes>
   )
 }
