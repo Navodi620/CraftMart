@@ -2,6 +2,7 @@ import express, { request, response } from "express";
 import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import { Payment } from './models/paymentModel.js';
+import feedbackRoute from './routes/feedbackRoute.js';
 import paymentsRoutes from './routes/paymentsRoute.js';
 import cors from 'cors';
 
@@ -31,6 +32,8 @@ app.get('/', (request, response) => {
 });
 
 app.use('/payments', paymentsRoutes);
+app.use('/feedbacks', feedbackRoute);
+
 
 mongoose
   .connect(mongoDBURL)
